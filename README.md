@@ -10,7 +10,7 @@ El proyecto se implementó en python, usando las siguientes librerías:
 
 El proyecto puede ejecutarse en el Notebook [implementation.ipynb](implementation.ipynb).
 
-## Diseno del modelo
+## Diseño del modelo
 En primer lugar, se cargan los pesos y configuración del modelo preentrenado Yolo-v4. En este caso se usó la versión ALPR-with-Yolo-v4 implementada en el repositorio [anpr-with-yolo-v4](https://github.com/Dodant/anpr-with-yolo-v4), la cual está enfocada en la detección de vehículos y placas.
 
 
