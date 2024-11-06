@@ -1,17 +1,17 @@
 # Sistema de Reconocimiento y Detección de Placas de Automóviles
-El reconocimiento óptico de caracteres, u OCR por sus siglas en ingles (Optical Character Recognition), consiste en la transcipcion de texto identificado en imagenes. Esta tecnologia puede usarse en una amplia gama de aplicaciones para automtizar diversas tareas, como lo son la recoleccion de informacion a partir de imagenes de facturas o documentos escaneados, la transcripcion automatica de texto o la identificacion de senalamiento de anuncios viales.
+El reconocimiento óptico de caracteres, u OCR por sus siglas en inglés (Optical Character Recognition), consiste en la transcripción de texto identificado en imágenes. Esta tecnología puede usarse en una amplia gama de aplicaciones para automatizar diversas tareas, como lo son la recolección de información a partir de imágenes de facturas o documentos escaneados, la transcripción automática de texto o la identificación de señalamiento de anuncios viales.
 
-En este respositorio se implemente un sistema de visión artificial para la detección automática de placas vehiculares y la identificación de caracteres mediante técnicas de OCR, orientado a automatizar procesos de control vehicular.
+En este repositorio se implementa un sistema de visión artificial para la detección automática de placas vehiculares y la identificación de caracteres mediante técnicas de OCR, orientado a automatizar procesos de control vehicular.
 
-El proyecto se implemento en python, usando las siguientes librerias:
-- OpenCV para el manejo y procesamiento de imagenes.
-- Yolo-v4 para a la tarea de deteccion de las placas de automoviles.
-- TeseractOCR para la extraccion de texto de las placas detectadas.
+El proyecto se implementó en python, usando las siguientes librerías:
+- OpenCV para el manejo y procesamiento de imágenes.
+- Yolo-v4 para a la tarea de detección de las placas de automóviles.
+- TeseractOCR para la extracción de texto de las placas detectadas.
 
 El proyecto puede ejecutarse en el Notebook [implementation.ipynb](implementation.ipynb).
 
 ## Diseno del modelo
-En primer lugar, se cargan los pesos y configuracion del modelo preentrenado Yolo-v4. En este caso se uso la version ALPR-with-Yolo-v4 implementada en el repositorio [anpr-with-yolo-v4](https://github.com/Dodant/anpr-with-yolo-v4), la cual esta enfocada en la deteccion de vehiculos y placas.
+En primer lugar, se cargan los pesos y configuración del modelo preentrenado Yolo-v4. En este caso se usó la versión ALPR-with-Yolo-v4 implementada en el repositorio [anpr-with-yolo-v4](https://github.com/Dodant/anpr-with-yolo-v4), la cual está enfocada en la detección de vehículos y placas.
 
 
 ```python
@@ -53,7 +53,7 @@ plt.show()
     
 
 
-A continuacion se realiza el preprocesamiento necesario para la evaluacion de la imagen de entrada en el modelo Yolo-v4:
+A continuación se realiza el preprocesamiento necesario para la evaluación de la imagen de entrada en el modelo Yolo-v4:
 
 
 ```python
@@ -67,9 +67,9 @@ blob = cv2.dnn.blobFromImage(image_input, 1 / 255.0, (416, 416), swapRB=True, cr
     
 
 
-Se realiza la prediccion del modelo sobre la imagen de entrada preprocesada. Como resultado Yolo-v4 devuelve un conjunto de posibles objetos detectados en la imagen, su posicion y la probabilidad de que la imagen pertenezca a la clase detectada. Cabe mencionar que el modelo devuelve 3 tipos de predicciones, pertenecientes a imagenes en escala pequena, mediana y grande. Por lo cual se opto por utilizar unicamente la prediccion con el mayor porcentaje de certeza de pertenecer a la clase `license_plate`.
+Se realiza la predicción del modelo sobre la imagen de entrada preprocesada. Como resultado, Yolo-v4 devuelve un conjunto de posibles objetos detectados en la imagen, su posición y la probabilidad de que la imagen pertenezca a la clase detectada. Cabe mencionar que el modelo devuelve 3 tipos de predicciones, pertenecientes a imágenes en escala pequeña, mediana y grande. Por lo cual se optó por utilizar únicamente la predicción con el mayor porcentaje de certeza de pertenecer a la clase `license_plate`.
 
-Una vez que se ha identificado dicha prediccion, se extrae el contenido de la region de la region de interes para su analisis.
+Una vez que se ha identificado dicha predicción, se extrae el contenido de la región de interés para su análisis.
 
 
 ```python
@@ -111,9 +111,9 @@ plt.show()
 
 
 Posteriormente, se realiza el siguiente preprocesamiento a la imagen obtenida:
-- Transformacion a escala de grises.
-- Aplicacion de filtro Gaussiano para suavizar la imagen.
-- Binarizacion de pixeles para resaltar los detalles de los caracteres en la placa.
+- Transformación a escala de grises.
+- Aplicación de filtro Gaussiano para suavizar la imagen.
+- Binarización de píxeles para resaltar los detalles de los caracteres en la placa.
 
 
 ```python
@@ -141,7 +141,7 @@ plt.show()
     
 
 
-Posteriormente se usa la imagen binarizada para la extraccion de caracteres con Tesseract:
+Posteriormente, se usa la imagen binarizada para la extracción de caracteres con TesseractOCR:
 
 
 ```python
@@ -158,7 +158,7 @@ text
 
 
 
-Finalmente se realiza el plot final, incluyendo la deteccion de la placa y el texto extraido
+Finalmente, se realiza el plot final, incluyendo la detección de la placa y el texto extraído
 
 
 ```python
@@ -184,8 +184,8 @@ plt.show()
     
 
 
-## Implementacion final
-Por ultimo, se realiza una implementacion final considerando todos los aspectos revisados en la seccion anterior, y se incluyen ejemplos del uso de la clase implementada.
+## Implementación final
+Por último, se realiza una implementación final considerando todos los aspectos revisados en la sección anterior, y se incluyen ejemplos del uso de la clase implementada.
 
 
 ```python
@@ -277,16 +277,6 @@ plt.show
 ```
 
     texto en la placa: 5204 - 8
-
-
-
-
-
-    <function matplotlib.pyplot.show(close=None, block=None)>
-
-
-
-
     
 ![png](README_files/README_17_2.png)
     
@@ -309,16 +299,6 @@ plt.show
 ```
 
     texto en la placa: 29003 Lil 17,
-
-
-
-
-
-    <function matplotlib.pyplot.show(close=None, block=None)>
-
-
-
-
     
 ![png](README_files/README_18_2.png)
     
@@ -342,16 +322,4 @@ plt.show
 
     texto en la placa: TPT- 156-8)
 
-
-
-
-
-    <function matplotlib.pyplot.show(close=None, block=None)>
-
-
-
-
-    
 ![png](README_files/README_19_2.png)
-    
-
